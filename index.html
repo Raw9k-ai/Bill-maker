@@ -153,31 +153,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
     const items = [
-      { id: 1, name: "Rice", image: "https://i.ibb.co/Xkd3t7V/rice.png" },
-      { id: 2, name: "Wheat", image: "https://i.ibb.co/r5LzqZB/wheat.png" },
-      { id: 3, name: "Sugar", image: "https://i.ibb.co/px7sPVf/sugar.png" },
-      { id: 4, name: "Oil", image: "https://i.ibb.co/LPPcTx3/oil.png" },
-      { id: 5, name: "Milk", image: "https://i.ibb.co/BVfQ2Xj/milk.png" },
-      { id: 6, name: "Salt", image: "https://i.ibb.co/vwXxmhF/salt.png" },
-      { id: 7, name: "Tea", image: "https://i.ibb.co/NZhvbk3/tea.png" },
-      { id: 8, name: "Soap", image: "https://i.ibb.co/6bm5ztf/soap.png" },
-      { id: 9, name: "Toothpaste", image: "https://i.ibb.co/wQHfLdn/toothpaste.png" },
-      { id: 10, name: "Brush", image: "https://i.ibb.co/j34RC7L/brush.png" },
-      { id: 11, name: "Detergent", image: "https://i.ibb.co/BVkSr0W/detergent.png" },
-      { id: 12, name: "Shampoo", image: "https://i.ibb.co/QXzV0bY/shampoo.png" },
-      { id: 13, name: "Dal", image: "https://i.ibb.co/3WdbBcg/dal.png" },
-      { id: 14, name: "Besan", image: "https://i.ibb.co/0K5RtxJ/besan.png" },
-      { id: 15, name: "Onion", image: "https://i.ibb.co/2YbczT9/onion.png" },
-      { id: 16, name: "Potato", image: "https://i.ibb.co/ZfgqbFb/potato.png" },
-      { id: 17, name: "Tomato", image: "https://i.ibb.co/K7zxn5p/tomato.png" },
-      { id: 18, name: "Garlic", image: "https://i.ibb.co/sqrcWyg/garlic.png" },
-      { id: 19, name: "Chili", image: "https://i.ibb.co/ypz2Lbf/chili.png" },
-      { id: 20, name: "Turmeric", image: "https://i.ibb.co/yfTkzr3/turmeric.png" },
-      { id: 21, name: "Ginger", image: "https://i.ibb.co/0BtPbZs/ginger.png" },
-      { id: 22, name: "Banana", image: "https://i.ibb.co/jvSZfsj/banana.png" },
-      { id: 23, name: "Apple", image: "https://i.ibb.co/Q9TkFvY/apple.png" },
-      { id: 24, name: "Egg", image: "https://i.ibb.co/Y7HPVYq/egg.png" },
-      { id: 25, name: "Chicken", image: "https://i.ibb.co/SdCDyn3/chicken.png" }
+      { id: 1, name: "TAMATAR", image: "https://imgs.search.brave.com/ZFtsArSuDruqjWRrVv90Z7SsXM64PtevWPcIA-T1wIk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZnJlZWltYWdl/cy5jb20vaW1hZ2Vz/L2dyaWRzL2UyMC90/b21hdG9lcy0xMzI5/MTA1LmpwZw" },
+      { id: 2, name: "KARELA", image: "https://imgs.search.brave.com/4gohp8wRN1mLKcYSX_7vOBtBFGRbgQHPsW4TOfCKzTA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi92ZWdl/dGFibGVzLWhlYWx0/aHktZm9vZC1hc2lh/bi1iaXR0ZXItZ291/cmQtbWVsb24tbWFy/a2V0LWNsb3NlLXVw/LW9yZ2FuaWMtZnJl/c2gtZ3JlZW4tbW9t/b3JkaWNhLWNoYXJh/bnRpYS1mYXJtZXJz/LTY1MzYwMDYxLmpw/Zw" },
+      { id: 3, name: "NIMBU", image: "https://imgs.search.brave.com/wJjrdrK58tvWi0pOEk0K29OtQ5EUNGuIrHjoklSYV48/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vd3d3Lmhh/cHB5YW5kaGFycmll/ZC5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMTcvMDgvRlJF/U0gtTEVNT05BREUt/SEFQUFlIQVJSSUVE/LmpwZz9yZXNpemU9/NzM2LDExMDQ" },
+      { id: 4, name: "MIRCHI", image: "https://imgs.search.brave.com/VcT8T2_N4d7-MafTwL864zN5t_N8BTmo5rIKkPEBTVc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMTIv/ODc3LzQ0MC9zbWFs/bC9mcmVzaC1ncmVl/bi1jaGlsaS1vbi1i/bGFjay1iYWNrZ3Jv/dW5kLXBob3RvLmpw/Zw" },
+      { id: 5, name: "LAUKI", image: "https://imgs.search.brave.com/txmzWYZUS3xJOfYQ5F4YFPh6s2myx1sCN2-Jl-jj-Dc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMxLmJpZ3N0b2Nr/cGhvdG8uY29tLzYv/Mi8xL2xhcmdlMi8x/MjYwMzM2NTkuanBn" },
+      { id: 6, name: "PYAZ", image: "https://imgs.search.brave.com/3d0Is5a-vNGJ8dpY7XgwPJhTPID8odv_IfLqnGt3Oo4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hdmlt/ZWVoZXJiYWwuY29t/L2Nkbi9zaG9wL2Fy/dGljbGVzLzU0MDQu/anBnP3Y9MTczNTMw/MzA2NCZ3aWR0aD0x/MDAw" },
+      { id: 7, name: "ADRAK", image: "https://imgs.search.brave.com/6dXeKoEnIJ7PWF55LNRZUf81VSZ2g65-XbIOpo37CM0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudG9paW1nLmNv/bS90aHVtYi9tc2lk/LTY1ODczNDQ4LGlt/Z3NpemUtNDI2MDIs/d2lkdGgtNDAwLHJl/c2l6ZW1vZGUtNC82/NTg3MzQ0OC5qcGc" },
+      { id: 8, name: "DHANIYA", image: "https://imgs.search.brave.com/Ml1C7jY2xOdgAiQC7pygpKTJW54-PG2rr5_AMmxMgpY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/c2h1dHRlcnN0b2Nr/LmNvbS9pbWFnZS1w/aG90by9ncmVlbi1j/b3JpYW5kZXItZGhh/bml5YS1hZnRlci1o/YXJ2ZXN0aW5nLTI2/MG53LTI0NzQ4MzQw/MTEuanBn" },
+      { id: 9, name: "LEHSUN", image: "https://imgs.search.brave.com/l3PM2L99Zs_Wzng59faZ4_F8BFL7Z-58PxnoxRTeQec/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTFCU05naUJEcUwu/anBn" },
+      { id: 10, name: "AALU", image: "https://imgs.search.brave.com/wzElb--i5VSROR_JJajIkyeVra99R3p4PjUNpbJSFMs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/Y2RueC5pbi8zNjIx/NzIvU0tVLTAwMDFf/MC0xNzEwOTQ3MjM3/Mjg0LmpwZz93aWR0/aD02MDAmZm9ybWF0/PXdlYnA" },
+      { id: 11, name: "BAND GOBHI", image: "https://imgs.search.brave.com/H_msbXNmj7i6Fq6SCLBLkKZ0zQzsVznC6xKjyUSsodE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTEzdndhQlczWUwu/anBn" },
+      { id: 12, name: "FUL GOBHI", image: "https://imgs.search.brave.com/CRQWNFVGFfYVKAZUQmH2Ho-2AyrNfQDDxMWUcd2aSfo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8y/LzI1L0NhdWxpZmxv/d2VyLkpQRw" }
     ];
 
     let selectedItemId = null;
