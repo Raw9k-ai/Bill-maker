@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bill Maker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1rem;
+      background: #f5f5f5;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card {
+      background: #fff;
+      padding: 1rem;
+      max-width: 100%;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    .row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    label {
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    input, button {
+      padding: 0.6rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+    }
+    .image-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1rem;
+      justify-content: center;
+    }
+    .image-option {
+      width: 70px;
+      height: 70px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f0f0;
+    }
+    .image-option.selected {
+      border-color: #007bff;
+    }
+    .image-option img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 0.7rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+    .total {
+      font-weight: bold;
+      text-align: right;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+    #bill-date-display {
+      font-weight: bold;
+      text-align: center;
+      margin: 1rem 0 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bill Maker</h1>
+  <div class="card">
+    <div class="row">
+      <label>Date</label>
+      <input type="date" id="bill-date">
+    </div>
+
+    <div class="row">
+      <label>Select Item (Tap Image)</label>
+      <div class="image-grid" id="imageGrid"></div>
+    </div>
+
+    <div class="row">
+      <label>Quantity</label>
+      <input type="number" id="qty" min="1" value="1">
+    </div>
+
+    <div class="row">
+      <label>Price per Unit (₹)</label>
+      <input type="number" id="price" min="0" value="0">
+    </div>
+
+    <button class="btn" onclick="addItem()">Add to Bill</button>
+
+    <!-- BILL SECTION START -->
+    <div id="bill-section">
+      <div id="bill-date-display"></div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Rate (₹)</th>
+            <th>Total (₹)</th>
+          </tr>
+        </thead>
+        <tbody id="bill-body"></tbody>
+      </table>
+
+      <div class="total" id="total-display">Total: ₹0.00</div>
+    </div>
+    <!-- BILL SECTION END -->
+
+    <button class="btn" onclick="downloadBillImage()">Download Bill Image</button>
+  </div>
+
+  <!-- Script for logic -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    const items = [
+      { id: 1, name: "Rice", image: "https://i.ibb.co/Xkd3t7V/rice.png" },
+      { id: 2, name: "Wheat", image: "https://i.ibb.co/r5LzqZB/wheat.png" },
+      { id: 3, name: "Sugar", image: "https://i.ibb.co/px7sPVf/sugar.png" },
+      { id: 4, name: "Oil", image: "https://i.ibb.co/LPPcTx3/oil.png" },
+      { id: 5, name: "Milk", image: "https://i.ibb.co/BVfQ2Xj/milk.png" },
+      { id: 6, name: "Salt", image: "https://i.ibb.co/vwXxmhF/salt.png" },
+      { id: 7, name: "Tea", image: "https://i.ibb.co/NZhvbk3/tea.png" },
+      { id: 8, name: "Soap", image: "https://i.ibb.co/6bm5ztf/soap.png" },
+      { id: 9, name: "Toothpaste", image: "https://i.ibb.co/wQHfLdn/toothpaste.png" },
+      { id: 10, name: "Brush", image: "https://i.ibb.co/j34RC7L/brush.png" },
+      { id: 11, name: "Detergent", image: "https://i.ibb.co/BVkSr0W/detergent.png" },
+      { id: 12, name: "Shampoo", image: "https://i.ibb.co/QXzV0bY/shampoo.png" },
+      { id: 13, name: "Dal", image: "https://i.ibb.co/3WdbBcg/dal.png" },
+      { id: 14, name: "Besan", image: "https://i.ibb.co/0K5RtxJ/besan.png" },
+      { id: 15, name: "Onion", image: "https://i.ibb.co/2YbczT9/onion.png" },
+      { id: 16, name: "Potato", image: "https://i.ibb.co/ZfgqbFb/potato.png" },
+      { id: 17, name: "Tomato", image: "https://i.ibb.co/K7zxn5p/tomato.png" },
+      { id: 18, name: "Garlic", image: "https://i.ibb.co/sqrcWyg/garlic.png" },
+      { id: 19, name: "Chili", image: "https://i.ibb.co/ypz2Lbf/chili.png" },
+      { id: 20, name: "Turmeric", image: "https://i.ibb.co/yfTkzr3/turmeric.png" },
+      { id: 21, name: "Ginger", image: "https://i.ibb.co/0BtPbZs/ginger.png" },
+      { id: 22, name: "Banana", image: "https://i.ibb.co/jvSZfsj/banana.png" },
+      { id: 23, name: "Apple", image: "https://i.ibb.co/Q9TkFvY/apple.png" },
+      { id: 24, name: "Egg", image: "https://i.ibb.co/Y7HPVYq/egg.png" },
+      { id: 25, name: "Chicken", image: "https://i.ibb.co/SdCDyn3/chicken.png" }
+    ];
+
+    let selectedItemId = null;
+    const bill = [];
+
+    const imageGrid = document.getElementById("imageGrid");
+    const billBody = document.getElementById("bill-body");
+    const totalDisplay = document.getElementById("total-display");
+    const dateDisplay = document.getElementById("bill-date-display");
+
+    function renderImageGrid() {
+      const fragment = document.createDocumentFragment();
+      items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "image-option";
+        div.innerHTML = `<img src="${item.image}" alt="${item.name}" title="${item.name}">`;
+        div.onclick = () => {
+          selectedItemId = item.id;
+          document.querySelectorAll(".image-option").forEach(el => el.classList.remove("selected"));
+          div.classList.add("selected");
+        };
+        fragment.appendChild(div);
+      });
+      imageGrid.appendChild(fragment);
+    }
+
+    renderImageGrid();
+
+    function addItem() {
+      const selected = items.find(i => i.id === selectedItemId);
+      const qty = parseInt(document.getElementById("qty").value);
+      const price = parseFloat(document.getElementById("price").value);
+      const date = document.getElementById("bill-date").value;
+
+      if (!selected || !qty || !price || !date || qty < 1 || price < 0) {
+        alert("Please fill all fields correctly.");
+        return;
+      }
+
+      const total = qty * price;
+      bill.push({ name: selected.name, qty, price, total });
+
+      dateDisplay.innerText = `Bill Date: ${date}`;
+      renderTable();
+    }
+
+    function renderTable() {
+      billBody.innerHTML = "";
+      let grandTotal = 0;
+
+      bill.forEach(entry => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${entry.name}</td>
+          <td>${entry.qty}</td>
+          <td>₹${entry.price.toFixed(2)}</td>
+          <td>₹${entry.total.toFixed(2)}</td>
+        `;
+        billBody.appendChild(row);
+        grandTotal += entry.total;
+      });
+
+      totalDisplay.innerText = `Total: ₹${grandTotal.toFixed(2)}`;
+    }
+
+    function downloadBillImage() {
+      const billSection = document.getElementById('bill-section');
+      html2canvas(billSection).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'bill.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+  </script>
+</body>
+</html>
