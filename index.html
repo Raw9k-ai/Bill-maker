@@ -107,10 +107,9 @@
 <body>
   <h1>Bill Maker</h1>
   <div class="card">
-    <div class="row">
-      <label>Date</label>
-      <input type="date" id="bill-date">
-    </div>
+
+    <!-- Auto Date Display -->
+    <div id="auto-date-display" style="text-align:center; font-weight:bold; margin-bottom: 0.5rem;"></div>
 
     <div class="row">
       <label>Select Item (Tap Image)</label>
@@ -149,7 +148,6 @@
     </div>
     <!-- BILL SECTION END -->
 
-  <!-- Script for logic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
     const items = [
@@ -175,6 +173,9 @@
     const totalDisplay = document.getElementById("total-display");
     const dateDisplay = document.getElementById("bill-date-display");
 
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("auto-date-display").innerText = `Bill Date: ${today}`;
+
     function renderImageGrid() {
       const fragment = document.createDocumentFragment();
       items.forEach(item => {
@@ -197,9 +198,8 @@
       const selected = items.find(i => i.id === selectedItemId);
       const qty = parseInt(document.getElementById("qty").value);
       const price = parseFloat(document.getElementById("price").value);
-      const date = document.getElementById("bill-date").value;
 
-      if (!selected || !qty || !price || !date || qty < 1 || price < 0) {
+      if (!selected || !qty || !price || qty < 1 || price < 0) {
         alert("Please fill all fields correctly.");
         return;
       }
@@ -207,7 +207,7 @@
       const total = qty * price;
       bill.push({ name: selected.name, qty, price, total });
 
-      dateDisplay.innerText = `Bill Date: ${date}`;
+      dateDisplay.innerText = `Bill Date: ${today}`;
       renderTable();
     }
 
@@ -228,8 +228,6 @@
       });
 
       totalDisplay.innerText = `Total: ₹${grandTotal.toFixed(2)}`;
-    
-      ;
     }
   </script>
 </body>
